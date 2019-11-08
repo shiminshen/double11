@@ -8,19 +8,19 @@ const itemPayload = {
   modelid: 6950131608
 }
 
-const xiaomiPayload = {
-  shopid: 29947484,
-  itemid: 2336142593,
-  modelid: 6353301854
-};
-
 // const xiaomiPayload = {
 //   shopid: 29947484,
 //   itemid: 2336142593,
-//   modelid: 4682222571
+//   modelid: 6353301854
 // };
 
-const cookies = Object.fromEntries(
+const xiaomiPayload = {
+  shopid: 29947484,
+  itemid: 2336142593,
+  modelid: 4682222571
+};
+
+const getCookies = Object.fromEntries(
   document.cookie.split('; ').map(x => x.split('='))
 )
 
@@ -30,7 +30,7 @@ const addtoCart = () => {
     credentials: 'same-origin',
     headers: {
       'x-api-source': 'pc',
-      'x-csrftoken': cookies.csrftoken,
+      'x-csrftoken': getCookies.csrftoken,
       'x-requested-with': 'XMLHttpRequest',
       'Content-Type': 'application/json'
     },
@@ -64,7 +64,6 @@ const execute = async () => {
 
 execute()
 
-
 /**
  *
  *
@@ -75,7 +74,7 @@ execute()
  **/
 
 
-const step1Check = window.setInterval(() => {
+const step1Check = () => window.setInterval(() => {
   let step1Btn
   if (window.location.pathname === '/cart/') {
     step1Btn = document.querySelector('.cart-page-footer__checkout button')
@@ -86,7 +85,7 @@ const step1Check = window.setInterval(() => {
   }
 }, 100)
 
-const step2Check = window.setInterval(() => {
+const step2Check = () => window.setInterval(() => {
   let step2Btn, loading
   if (window.location.pathname === '/checkout/') {
     window.clearInterval(step1Check)
@@ -102,3 +101,10 @@ const step2Check = window.setInterval(() => {
     }
   }
 }, 100)
+
+module.exports = {
+  addtoCart,
+  execute,
+  step1Check,
+  step2Check
+}
