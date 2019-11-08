@@ -20,7 +20,7 @@ const xiaomiPayload = {
   modelid: 4682222571
 };
 
-const getCookies = Object.fromEntries(
+const getCookies = () => Object.fromEntries(
   document.cookie.split('; ').map(x => x.split('='))
 )
 
@@ -30,7 +30,7 @@ const addtoCart = () => {
     credentials: 'same-origin',
     headers: {
       'x-api-source': 'pc',
-      'x-csrftoken': getCookies.csrftoken,
+      'x-csrftoken': getCookies().csrftoken,
       'x-requested-with': 'XMLHttpRequest',
       'Content-Type': 'application/json'
     },
@@ -49,6 +49,7 @@ const addtoCart = () => {
 const getCartInfo = () => fetch('https://shopee.tw/api/v1/account_info/?need_cart=1&skip_address=1', { credentials: 'same-origin' }).then(res => res.json())
 
 const execute = async () => {
+  console.log(window);
   let addtoCartSuccess = false
   let cartInfo = false
   do {
@@ -62,7 +63,7 @@ const execute = async () => {
   document.location.href = 'https://shopee.tw/cart/'
 }
 
-execute()
+// execute()
 
 /**
  *
