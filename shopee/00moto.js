@@ -1,7 +1,7 @@
 const puppeteer = require('puppeteer')
 
 const wsChromeEndpointurl =
-  'ws://127.0.0.1:9222/devtools/browser/e564fa64-23b0-4092-9cde-b261f043bd95'
+  'ws://127.0.0.1:9222/devtools/browser/29d1f299-4ad9-42cb-9f06-db473a142ab1'
 
 ;(async () => {
   // const browser = await puppeteer.launch({ headless: false });
@@ -11,17 +11,30 @@ const wsChromeEndpointurl =
   const page = await browser.newPage()
   await page.goto('https://shopee.tw/')
 
+  setInterval(() => {
+    page.close()
+  }, 100000)
+
   const evaluateAddtoCart = await page.evaluate(async () => {
+    //test
+    // const itemPayload = {
+    //   shopid: 20162694,
+    //   itemid: 422541525,
+    //   modelid: 324508154
+    // }
+    
+    //0000 iphone
     // const itemPayload = {
     //   shopid: 54598032,
     //   itemid: 2804455767,
     //   modelid: 6950131608
     // }
 
+    // 0000 moto
     const itemPayload = {
-      shopid: 29947484,
-      itemid: 2336142593,
-      modelid: 4682222571
+      shopid: 23151015,
+      itemid: 2288651549,
+      modelid: 4453135821
     }
 
     const getCookies = () =>
@@ -57,11 +70,11 @@ const wsChromeEndpointurl =
     const execute = async () => {
       console.log(window)
       let addtoCartSuccess = false
-      let cartInfo = false
       do {
-        addtoCartResp = await addtoCart()
-        console.log(addtoCartResp)
-        cartInfo = await getCartInfo()
+        const addtoCartResp = await addtoCart()
+        console.log(addtoCartResp);
+        const cartInfo = await getCartInfo()
+        console.log(cartInfo);
         addtoCartSuccess =
           !addtoCartResp.error && (cartInfo && cartInfo.cart_item_count)
       } while (!addtoCartSuccess)
@@ -69,6 +82,7 @@ const wsChromeEndpointurl =
     }
     return await execute()
   })
+  return
 
   await page.goto('https://shopee.tw/cart/')
 

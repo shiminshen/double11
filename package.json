@@ -11,5 +11,8 @@
   "dependencies": {
     "puppeteer": "^2.0.0",
     "puppeteer-core": "^2.0.0"
+  },
+  "devDependencies": {
+    "prettier": "^1.19.1"
   }
 }
