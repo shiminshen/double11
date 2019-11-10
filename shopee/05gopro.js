@@ -31,10 +31,17 @@ const wsChromeEndpointurl =
     // }
 
     // 0000 moto
+    // const itemPayload = {
+    //   shopid: 23151015,
+    //   itemid: 2288651549,
+    //   modelid: 4453135821
+    // }
+
+    // 0500 gopro
     const itemPayload = {
-      shopid: 23151015,
-      itemid: 2288651549,
-      modelid: 4453135821
+      shopid: 9376735,
+      itemid: 1527673832,
+      modelid: 8099940894
     }
 
     const getCookies = () =>

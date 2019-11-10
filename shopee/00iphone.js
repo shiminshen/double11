@@ -13,7 +13,7 @@ const wsChromeEndpointurl =
 
   setInterval(() => {
     page.close()
-  }, 100000)
+  }, 3600000)
 
   const evaluateAddtoCart = await page.evaluate(async () => {
     //test
@@ -110,7 +110,7 @@ const wsChromeEndpointurl =
         }
         if (step2Btn && !loading) {
           console.log('click step2!')
-          // step2Btn.click()
+          step2Btn.click()
         }
       }
     }, 100)

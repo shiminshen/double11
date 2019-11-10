@@ -17,18 +17,18 @@ const wsChromeEndpointurl =
 
   const evaluateAddtoCart = await page.evaluate(async () => {
     //test
-    // const itemPayload = {
-    //   shopid: 20162694,
-    //   itemid: 422541525,
-    //   modelid: 324508154
-    // }
+    const itemPayload = {
+      shopid: 20162694,
+      itemid: 422541525,
+      modelid: 324508154
+    }
     
     //0000 iphone
-    const itemPayload = {
-      shopid: 54598032,
-      itemid: 2804455767,
-      modelid: 6950131608
-    }
+    // const itemPayload = {
+    //   shopid: 54598032,
+    //   itemid: 2804455767,
+    //   modelid: 6950131608
+    // }
 
     // 0000 moto
     // const itemPayload = {

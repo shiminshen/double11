@@ -31,10 +31,16 @@ const wsChromeEndpointurl =
     // }
 
     // 0000 moto
+    // const itemPayload = {
+    //   shopid: 23151015,
+    //   itemid: 2288651549,
+    //   modelid: 4453135821
+    // }
+
+    // 0200 rimowa
     const itemPayload = {
-      shopid: 23151015,
-      itemid: 2288651549,
-      modelid: 4453135821
+      shopid: 18770741,
+      itemid: 1803959973
     }
 
     const getCookies = () =>
