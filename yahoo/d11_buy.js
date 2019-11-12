@@ -1,5 +1,10 @@
-let {
-  authToken: { token: authToken }
+const {
+  authToken: { token: authToken },
+  ecgql: {
+    gqlItemPage: {
+      id: productBundleId
+    }
+  }
 } = ISO_REDUX_DATA
 
 let receiver = {
@@ -25,14 +30,14 @@ let addToCartPayload = {
   type: 'CALL_RESERVICE',
   payload: {
     authToken,
-    cartType: '10',
+    cartType: '30',
     checkoutAction: 'AddToCart',
     isMobile: false,
     isStoreProduct: false,
     itemLines: [
       {
-        // productBundleId: '8660792',
-        productBundleId: '4804805',
+        productBundleId,
+        // productBundleId: '4804805',
         quantity: 1
       }
     ]
@@ -54,7 +59,11 @@ const cartCount = async () => {
     .then(res => res.json())
     .then(
       res =>
-        res && res.data && res.data.shopping && res.data.shopping.carts[0].count
+        res &&
+        res.data &&
+        res.data.shopping &&
+        res.data.shopping.carts &&
+        res.data.shopping.carts[0].count
     )
 }
 
@@ -76,14 +85,15 @@ let addCartResp
 let count
 
 const execute = async () => {
-  while (!addCartSuccess) {
+  while (!addCartSuccess || !Number(count)) {
     addCartResp = await addToCart()
-    count = await cartCount()
+    // count = await cartCount()
     addCartSuccess = !addCartResp.error
     console.log(addCartResp)
-    if (!addCartSuccess && Number(count)) {
+    // console.log(count);
+    if (!addCartSuccess || !Number(count)) {
       console.log('FAILED: addToCart')
-      console.log(addCartResp.payload.errorData.error[0])
+      // console.log(addCartResp.payload.errorData.error[0])
     }
   }
 }

@@ -15,7 +15,7 @@ const cartCount = async () => {
 }
 
 const getCheckoutPageData = async () =>
-  fetch('https://twpay.buy.yahoo.com/ajax/checkout/preview?fromCart=10', {
+  fetch('https://twpay.buy.yahoo.com/ajax/checkout/preview?fromCart=40', {
     credentials: 'include',
     headers: {
       'Content-Type': 'application/json'
@@ -44,13 +44,13 @@ const tmpPlaceorderPayload = {
   actCode: '',
   coServerName1: '',
   coServerName2: '',
-  ct: 10,
+  ct: 40,
   expco_bookmark: '1',
   invo_donate: '2',
   'ordr_note[0]': '',
   ordr_phone_extension: '',
   paysrc: 50,
-  paytype: '1',
+  paytype: '81',
   recv_zipcode: '115',
   session_id: 'Y_314DA_778145bb188aaf1fdc399506abbd9473',
   useExpco: 1,
@@ -69,6 +69,7 @@ const checkoutExecute = async () => {
       checkoutResp.cart &&
       checkoutResp.cart.itemLines.length
     ) {
+      console.log(checkoutResp.cart.itemLines.length)
       getDataSuccess = true
       console.log('placeorder')
       const {
@@ -87,9 +88,10 @@ const checkoutExecute = async () => {
 
       let placeorderSuccess
       do {
+        console.log('placeorder')
         await placeOrder(placeorderPayload)
-        placeorderSuccess = !Number(await cartCount())
-      } while (placeorderSuccess)
+        // placeorderSuccess = !Number(await cartCount())
+      } while (!placeorderSuccess)
     }
   }
 }
